@@ -1,0 +1,43 @@
+
+Python Live Project Code Snippets
+
+# Models.py includes database information
+
+ <div class="overflow-auto">
+                <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+                    <div class="db-container">
+                    <!-- USE  'for' BLOCK TAG TO ITERATE THROUGH REGISTER MODEL
+                            be sure to include a dictionary {'register':register}
+                            in views.py -->
+                    {% for member in register %}
+                         <a href="../{{member.pk}}/info/"
+                            class="list-group-item list-group-item-action list-group-item-primary">
+                             {{ member.username|title }}</a>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+# Views.py file holds logic and connects the template to the database
+# Renders the member page
+# See 'study_app_members.html for logic that displays all items in db
+def members(request):
+    register = Register.objects.all()
+    return render(request, 'StudyApp/study_app_members.html', {'register':register})
+
+<!-- Template file in which the user sees and interacts with  -->
+<!-- study_app_members.html -->
+ <div class="overflow-auto">
+                <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+                    <div class="db-container">
+                    <!-- USE  'for' BLOCK TAG TO ITERATE THROUGH REGISTER MODEL
+                            be sure to include a dictionary {'register':register}
+                            in views.py -->
+                    {% for member in register %}
+                         <a href="../{{member.pk}}/info/"
+                            class="list-group-item list-group-item-action list-group-item-primary">
+                             {{ member.username|title }}</a>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>

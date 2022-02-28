@@ -1,0 +1,89 @@
+# NOTE: for this section, you will need to import a module and a class
+# views.py 
+#   import requests,
+#   from bs4 import BeautifulSoup
+
+# Creating the view method that will render the study_app_focus.html template
+def focus(request):
+    page = requests.get("https://www.sciencenewsforstudents.org/article/top-10-tips-study-smarter-not-longer-study-skills")
+    soup = BeautifulSoup(page.content, 'html.parser')
+    # Target the html tag I want (which are the h4 tags)
+    tips = soup.find_all('h4')
+    para = soup.find_all('p')
+    # creates a tuple containing all ten tips I want to display
+    top_ten = (tips[0].get_text(), para[15].get_text(), para[16].get_text(), tips[1].get_text(), para[18].get_text(),
+               para[19].get_text(), tips[2].get_text(), para[22].get_text(), para[23].get_text(), tips[3].get_text(),
+               para[24].get_text(), para[25].get_text(), tips[4].get_text(), para[30].get_text(), para[31].get_text(),
+               tips[6].get_text(), para[34].get_text(), para[35].get_text(),  tips[7].get_text(), para[38].get_text(),
+               para[40].get_text(), tips[8].get_text(), para[41].get_text(), para[42].get_text(),  tips[9].get_text(),
+               para[44].get_text(), para[47].get_text(), tips[10].get_text(), para[48].get_text(), para[50].get_text(),
+               para[51].get_text(), para[52].get_text(), tips[11].get_text, para[53].get_text(), para[54].get_text())
+    """
+        Attempted code:
+        study = {'top_ten':top_ten}
+        but it didn't render on the webpage
+    """
+    #   creating a direct dictionary of top_ten in the return
+    return render(request, "StudyApp/study_app_focus.html", {'top_ten':top_ten})
+
+<!-- study_app-focus.html -->
+<h2>Top 10 Tips To Study Smarter Not Longer</h2>
+        <br><br>
+        <!-- Tip #1 -->
+        <h4 id="tip1">{{ top_ten.0|title }}</h4> <br>
+        <p>{{ top_ten.1 }}</p>
+        <p>{{ top_ten.2 }}</p>
+        <br><br>
+        <!-- Tip #2 -->
+        <h4 id="tip2">{{ top_ten.3|title }}</h4><br>
+        <p>{{ top_ten.4 }}</p>
+        <p>{{ top_ten.5 }}</p>
+        <br><br>
+        <!-- Tip #3 -->
+        <h4 id="tip3">{{ top_ten.6|title }}</h4><br>
+        <p>{{ top_ten.7 }}</p>
+        <p>{{ top_ten.8 }}</p>
+        <br><br>
+        <!-- Tip #4 -->
+        <h4 id="tip4">{{ top_ten.9|title }}</h4><br>
+        <p>{{ top_ten.10 }}</p>
+        <p>{{ top_ten.11 }}</p>
+        <br><br>
+        <!-- Tip #5 -->
+        <h4 id="tip5">{{ top_ten.12|title }}</h4><br>
+        <p>{{ top_ten.13 }}</p>
+        <p>{{ top_ten.14 }}</p>
+        <br><br>
+        <!-- Tip #6 -->
+        <h4 id="tip6">{{ top_ten.15|title }}</h4><br>
+        <p>{{ top_ten.16 }}</p>
+        <p>{{ top_ten.17 }}</p>
+        <br><br>
+        <!-- Tip #7 -->
+        <h4 id="tip7">{{ top_ten.18|title }}</h4><br>
+        <p>{{ top_ten.19 }}</p>
+        <p>{{ top_ten.20 }}</p>
+        <br><br>
+        <!-- Tip #8 -->
+        <h4 id="tip8">{{ top_ten.21|title }}</h4><br>
+        <p>{{ top_ten.22 }}</p>
+        <p>{{ top_ten.23 }}</p>
+        <br><br>
+        <!-- Tip #9 -->
+        <h4 id="tip9">{{ top_ten.24|title }}</h4><br>
+        <p>{{ top_ten.25 }}</p>
+        <p>{{ top_ten.26 }}</p>
+        <br><br>
+        <!-- Tip #10 -->
+        <h4 id="tip10">{{ top_ten.27|title }}</h4><br>
+        <p>{{ top_ten.28 }}</p>
+        <p>{{ top_ten.29 }}</p>
+        <p>{{ top_ten.30 }}</p>
+        <p>{{ top_ten.31 }}</p>
+        <br><br>
+        <!-- Bonus Tip -->
+        <h4 id="bonus">{{ top_ten.32|title }}</h4><br>
+        <p>{{ top_ten.33 }}</p>
+        <p>{{ top_ten.34 }}</p>
+        <p>{{ top_ten.35 }}</p>
+        
